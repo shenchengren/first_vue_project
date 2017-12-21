@@ -22,7 +22,7 @@
                 username:"",
                 psd:"",
                 msg: "",
-                isTrue: true
+                isTrue: false
             }
         },
         methods: {

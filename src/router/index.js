@@ -12,27 +12,27 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/',
-      name: 'nav',
-      component: Nav
-    },
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
+    // {
+    //   path: '/',
+    //   name: 'nav',
+    //   component: Nav
+    // },
+    // {
+    //   path: '/',
+    //   name: 'HelloWorld',
+    //   component: HelloWorld
+    // },
     {
       path: '/home',
       name: 'Home',
       component: HomeC
     },
     {
-      path: '/tab',
+      path: '/tab',//网站后面的 名字
       name: 'login',
       component: logIn,
       children:[
-        {path:'/login/login',component:logIn}
+        {path:'/login',component:logIn}
        ]
     },
     {
@@ -40,7 +40,7 @@ export default new Router({
       name: 'login',
       component: reg,
       children:[
-        {path:'/login/reg',component:reg}
+        {path:'/reg',component:reg}
        ]
     },
     {

@@ -15,16 +15,12 @@
                     },
                     {
                         name:"登录",
-                        toLink:"/login/login",
+                        toLink:"/login",
                     },
                     {
                         name:"免费注册",
-                        toLink:"/login/reg",
+                        toLink:"/reg",
                     },
-                    {
-                        name:"免费注册",
-                        toLink:"/login/reg",
-                    }
                 ]
             }
         },
@@ -33,7 +29,7 @@
 <style lang="scss" scoped>
     ul{
         li{
-            float:left;
+            // float:left;
             list-style:none;
             padding-right:15px;
             &:last-child{
