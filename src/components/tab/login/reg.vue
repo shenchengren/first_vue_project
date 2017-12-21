@@ -10,20 +10,15 @@
             return {
                 items: [
                     "首页",
-                    "登陆",
-                    "退出"
+                    "登陆"
                 ]
             }
         },
-        // components:{
-        //     'app-nav': Nav,
-        //     'app-content': Content,
-        //     'app-footer': Footer
-        // }
     }
 </script>
 <style lang="scss" scoped>
     ul{
+        clear: both;
         li{
             float:left;
             list-style:none;
