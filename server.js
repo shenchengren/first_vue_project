@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = process.env.PORT || 8078;
+const PORT = process.env.PORT || 8079;
 
 app.use(bodyParser.json())
     .use(bodyParser.urlencoded({extended: false}));
@@ -12,7 +12,7 @@ app.listen(PORT, ()=>{
 });
 const user = {
     name: 'admin',
-    pwd: 111
+    pwd: '111'
 };
 
 // login
@@ -21,12 +21,11 @@ app.post('/api/login', (req,res)=>{
     const resBody = {
         userName: user.name,
         msg: 'your user name or password is not correct~',
-        status: 0
+        status: 0,
     };
     if(payload.name === user.name && payload.pwd === user.pwd){
         resBody.msg = 'login successfully!';
         resBody.status = 1;
     }
-
     res.json(resBody);
 });
