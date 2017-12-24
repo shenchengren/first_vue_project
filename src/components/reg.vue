@@ -16,6 +16,11 @@
                 ]
             }
         },
+        methods:{
+            yincang:function(){
+                this.$emit('increment',false);
+            }
+        }
     }
 </script>
 <style lang="scss" scoped>

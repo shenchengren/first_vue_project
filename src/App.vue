@@ -1,8 +1,7 @@
 <template>
     <div id="app">
-        <app-nav />
-        <div>dddd</div>
-        <!-- <router-view/> -->
+        <app-nav v-if="isShow"></app-nav>
+        <router-view @increment="incrementTotal"></router-view>
         <!-- <router-view name="login" /> -->
         <!-- <div class="footer">我是底部</div> -->
     </div>
@@ -14,24 +13,19 @@ export default {
     name: 'app',
     data() {
         return {
-            items: [
-                {
-                    name: "首页",
-                    toLink: "../",
-                },
-                {
-                    name: "登录",
-                    toLink: "/login",
-                },
-                {
-                    name: "免费注册",
-                    toLink: "/reg",
-                }
-            ]
+           isShow:true
         }
     },
     components:{
         'app-nav': Nav
+    },
+    mounted(){
+
+    },
+    methods:{
+        incrementTotal(e){
+            this.isShow=e;
+        }
     }
 }
 </script>
@@ -44,22 +38,27 @@ export default {
     text-align: center;
     color: #2c3e50; // margin-top: 60px;
 }
-
-ul {
+.clearfix{
+    content:"";
     clear: both;
-    li {
-        float: left;
-        list-style: none;
-        padding-right: 15px;
-        margin-bottom: 200px;
-        &:last-child {
-            padding: 0;
-        }
-        &:hover {
-            color: #44CC11;
-        }
-    }
+    display: block;
 }
+
+// ul {
+//     clear: both;
+//     li {
+//         float: left;
+//         list-style: none;
+//         padding-right: 15px;
+//         margin-bottom: 200px;
+//         &:last-child {
+//             padding: 0;
+//         }
+//         &:hover {
+//             color: #44CC11;
+//         }
+//     }
+// }
 
 .footer {
     display: inline-block;

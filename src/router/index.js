@@ -4,50 +4,34 @@ import Router from 'vue-router';
 import HelloWorld from '@/components/HelloWorld';
 import Nav from '@/components/nav';
 import HomeC from '@/components/home/Home';
-import logIn from '@/components/tab/login/login';
-import reg from '@/components/tab/login/reg';
-import tabNav from '@/components/tab/nav';
+import logIn from '@/components/login';
+import reg from '@/components/reg';
+import inDex from '@/components/index';
 
-Vue.use(Router)
+Vue.use(Router);
+let router = new Router();
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'nav',
-    //   component: Nav
-    // },
-    // {
-    //   path: '/',
-    //   name: 'HelloWorld',
-    //   component: HelloWorld
-    // },
     {
       path: '/home',
       name: 'Home',
       component: HomeC
     },
     {
-      path: '/tab',//网站后面的 名字
-      name: 'login',
-      component: logIn,
-      children:[
-        {path:'/login',component:logIn}
-       ]
+      path: '/reg',
+      name: 'reg',
+      component: reg
     },
     {
-      path: '/tab',
+      path: '/login',
       name: 'login',
-      component: reg,
-      children:[
-        {path:'/reg',component:reg}
-       ]
+      component: logIn
     },
     {
-      path: '/tab',
-      name: 'nav',
-      component: tabNav
-    },
-    
+      path:"/",
+      name:"index",
+      component:inDex
+    }
   ]
 })
