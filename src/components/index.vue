@@ -1,5 +1,5 @@
 <template>
-  <div class="index-body">
+  <div class="index-body clearfix">
     
   </div>
 </template>
@@ -8,6 +8,6 @@
       
     }
 </script>
-<style lang="sass" scoped>
-
+<style lang="scss" scoped>
+  
 </style>

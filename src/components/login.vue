@@ -1,18 +1,25 @@
 <template >
-    <div class="loginForm">
-        <div class="name">
-            <label for="userName">姓名</label>
-            <input type="text" id="userName" placeholder="请输入姓名" v-model="username">
+    <div class="login-box clearfix">
+        <div class="left">
+            <img src="../assets/logps.png" alt="">
         </div>
-        <div class="pwd">
-            <label for="userPwd">密码</label>
-            <input type="password" id="userPwd" placeholder="请输入密码" @keydown="keyDown" v-model="psd">
+        <div class="right">
+            <div class="loginForm">
+                <div class="name">
+                    <label for="userName">姓名</label>
+                    <input type="text" id="userName" placeholder="请输入姓名" v-model="username">
+                </div>
+                <div class="pwd">
+                    <label for="userPwd">密码</label>
+                    <input type="password" id="userPwd" placeholder="请输入密码" @keydown="keyDown" v-model="psd">
+                </div>
+                <div class="lg">
+                    <button @click="loginFun">登录</button>
+                    <button @click="goHome">返回首页</button>
+                </div>
+                <span v-show="isTrue">{{msg}}</span>
+            </div>
         </div>
-        <div class="lg">
-            <button @click="loginFun">登录</button>
-            <button @click="goHome">返回首页</button>
-        </div>
-        <span v-show="isTrue">{{msg}}</span>
     </div>
 </template>
 
@@ -36,8 +43,8 @@ export default {
         this.yincang();
     },
     methods: {
-        keyDown(event){
-            if(event.keyCode==13){
+        keyDown(event) {
+            if (event.keyCode == 13) {
                 this.loginFun();
             }
         },
@@ -59,36 +66,52 @@ export default {
                     console.log(error);
                 });
         },
-        yincang: function() {
-            this.$emit('increment', false);
-        },
+        // yincang: function() {
+        //     this.$emit('increment', false);
+        // },
         goHome() {
-            this.$router.push({path: '/'})
+            this.$router.push({ path: '/' })
         }
     }
 }
 </script>
 <style lang="scss" scoped>
-.loginForm {
-    clear: both;
+.login-box {
+    width: 1000px;
     margin: 0 auto;
-    height: 500px;
-    width: 500px;
-    &>div {
-        margin: 25px 0;
+    .left {
+        float: left;
+        img {
+            margin-top: 72px;
+        }
     }
-    span {
-        position: fixed;
-        top: 40%;
-        left: 50%;
-        background: #000;
-        opacity: 0.5;
-        color: white;
-        font-size: 28px;
-        display: inline-block;
-        padding: 10px;
-        width: 300px;
-        margin-left: -150px;
+    .right {
+        float: right;
+        // margin: 0 auto;
+        height: 405px;
+        width: 400px;
+        margin-top: 75px;
+        .loginForm{
+            width: 296px;
+        }
+        &>div {
+            // margin: 25px 0;
+        }
+        span {
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            background: #000;
+            opacity: 0.5;
+            color: white;
+            font-size: 28px;
+            display: inline-block;
+            padding: 10px;
+            width: 300px;
+            margin-left: -150px;
+        }
     }
 }
+
+.loginForm {}
 </style>

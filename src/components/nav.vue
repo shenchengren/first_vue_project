@@ -1,7 +1,7 @@
 <template>
 <div class="nav-box">
    <div class="nav clearfix">
-          <div class="logtext"><span>热卖街</span><span class="logtext1">Remaijie.net</span></div>
+          <div class="logtext"><span @click="goHome">热卖街</span><span class="logtext1">Remaijie.net</span></div>
           <ul class="clearfix">
               <li v-for="item in items"><router-link :to="item.toLink">{{item.name}}</router-link></li>
           </ul>
@@ -33,8 +33,12 @@ export default {
   methods: {
     handleClick() {
       console.log("nav");
+    },
+    goHome(){
+      this.$router.push({path: '/'});
     }
-  }
+  },
+  
 };
 </script>
 <style lang="scss" scoped>
@@ -76,8 +80,8 @@ ul {
     &:last-child {
       padding: 0;
     }
-    &:hover {
-      color: #44cc11;
+    a:hover{
+      color: deeppink
     }
   }
 }
