@@ -1,8 +1,12 @@
 <template>
-  <div>这是一个首页，乌拉拉！！！</div>
+  <div class="index-body">
+    
+  </div>
 </template>
 <script>
-    
+    export default{
+      
+    }
 </script>
 <style lang="sass" scoped>
 

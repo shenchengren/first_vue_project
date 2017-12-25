@@ -63,9 +63,7 @@ export default {
             this.$emit('increment', false);
         },
         goHome() {
-            this.$emit('increment', true);
             this.$router.push({path: '/'})
-            console.log(router);
         }
     }
 }
