@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import bus from '../common/bus';
 export default {
   props: ["zhuangtai"],
   data() {
@@ -29,6 +30,9 @@ export default {
       console.log(this.getCookie("first_vue_code1"));
       this.isShow = false;
     }
+    bus.$on('my-event', function(data){
+      console.log(data);
+    })
   },
   watch: {
     $route(to, from) {

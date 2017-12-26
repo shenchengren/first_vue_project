@@ -4,8 +4,12 @@
   </div>
 </template>
 <script>
+    import bus from '../common/bus';
+
     export default{
-      
+      mounted(){
+        bus.$emit('my-event', 'hello world');
+      }
     }
 </script>
 <style lang="scss" scoped>

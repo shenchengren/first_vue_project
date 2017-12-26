@@ -31,8 +31,13 @@
 import Router from "vue-router";
 import Vue from "vue";
 import reg from "@/components/reg";
-Vue.use(Router);
 
+import {Utils, A} from '../common/utils';
+let utils = new Utils();
+console.log(utils);
+Vue.use(Router);
+let aaa = new A();
+console.log(aaa.job);
 const router = new Router();
 export default {
   data() {
@@ -84,13 +89,8 @@ export default {
       this.$router.push({ path: "/" });
     },
     //设置cookie
-    setCookie: function(cname, cvalue, exdays) {
-      var d = new Date();
-      d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
-      var expires = "expires=" + d.toUTCString();
-      //   console.info(cname + "=" + cvalue + "; " + expires);
-      document.cookie = cname + "=" + cvalue + "; " + expires;
-      //   console.info(document.cookie);
+    setCookie(cname, cvalue, exdays){
+      utils.setCookie(cname, cvalue, exdays)
     },
     //获取cookie
     getCookie: function(cname) {
