@@ -1,25 +1,18 @@
 <template>
-    <ul>
-        <li v-for="item in items">{{item}}</li>
-    </ul>
+    <div class="reg-box">
+        这是注册页面
+    </div>
 </template>
 
 <script>
     export default {
         data(){
             return {
-                items: [
-                    "首页",
-                    "登陆",
-                    "登陆",
-                    "登陆"
-                ]
+                
             }
         },
         methods:{
-            yincang:function(){
-                this.$emit('increment',false);
-            }
+            
         }
     }
 </script>
