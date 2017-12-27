@@ -1,7 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const usersDb = require('./model/model').usersDb.get('users');
+const Db = require('./model/model');
+const usersDb = Db.usersDb.get('users');
+const booksDb = Db.booksDb.get('books');
 // console.log(db);
 
 const app = express();
@@ -13,11 +15,6 @@ app.use(bodyParser.json())
 app.listen(PORT, ()=>{
     console.log('express server is running on port: %d', PORT);
 });
-// const user = {
-//     id:'1001',
-//     name: 'admin',
-//     pwd: '111'
-// };
 
 // login
 app.post('/api/login', (req,res)=>{
@@ -83,4 +80,10 @@ app.post('/api/username/check', (req,res)=>{
         // resBody.userName = newUser.name;
     }
     res.json(resBody);
+});
+
+// retrieve all books
+app.get('/api/books', (req,res)=>{
+    let books = booksDb.value();
+    res.send(books).end();
 });
