@@ -1,33 +1,33 @@
 <template >
-    <div class="login-box clearfix">
-        <div class="left">
-            <img src="../assets/logps.png" alt="">
-        </div>
-        <div class="right">
-            <div class="loginForm">
-                <div class="top">尊敬的用户,请注册账户</div>
-                <div class="name">
-                    <label for="userName">姓名</label>
-                    <input type="text" id="userName" placeholder="请输入姓名" v-model="username" @blur="nameBlue">
-                </div>
-                <i :class="classBox.active1">该用户名已被使用</i>
-                <div class="pwd">
-                    <label for="userPwd">密码</label>
-                    <input type="password" id="userPwd" placeholder="请输入密码" @keydown="keyDown" v-model="psd" @blur="pwdBlue">
-                </div>
-                <i :class="classBox.active2">密码过于简单</i>
-                <div class="confirm">
-                     <label for="userConfirm">密码</label>
-                    <input type="password" id="userConfirm" placeholder="请再次输入密码" @keydown="keyDown" v-model="confirm" @blur="confirmBlue">
-                </div>
-                <i :class="classBox.active3">2次输入的密码不一致</i>
-                <div class="lg">
-                    <button @click="regFun">注册</button>
-                </div>
-                <span v-show="isTrue">{{msg}}</span>
-            </div>
-        </div>
+  <div class="login-box clearfix">
+    <div class="left">
+      <img src="../assets/logps.png" alt="">
     </div>
+    <div class="right">
+      <div class="loginForm">
+        <div class="top">尊敬的用户,请注册账户</div>
+        <div class="name">
+          <label for="userName">姓名</label>
+          <input type="text" id="userName" placeholder="请输入姓名" v-model="username" @blur="nameBlue">
+        </div>
+        <i :class="classBox.active1">该用户名已被使用</i>
+        <div class="pwd">
+          <label for="userPwd">密码</label>
+          <input type="password" id="userPwd" placeholder="请输入密码" @keydown="keyDown" v-model="psd" @blur="pwdBlue">
+        </div>
+        <i :class="classBox.active2">密码过于简单</i>
+        <div class="confirm">
+          <label for="userConfirm">密码</label>
+          <input type="password" id="userConfirm" placeholder="请再次输入密码" @keydown="keyDown" v-model="confirm" @blur="confirmBlue">
+        </div>
+        <i :class="classBox.active3">2次输入的密码不一致</i>
+        <div class="lg">
+          <button @click="regFun">注册</button>
+        </div>
+        <span v-show="isTrue">{{msg}}</span>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -35,12 +35,7 @@ import Router from "vue-router";
 import Vue from "vue";
 import reg from "@/components/reg";
 
-// import {Utils, A} from '../common/utils';
-// let utils = new Utils();
-// console.log(utils);
 Vue.use(Router);
-// let aaa = new A();
-// console.log(aaa.job);
 const router = new Router();
 export default {
   data() {
@@ -52,14 +47,19 @@ export default {
       isTrue: false,
       classBox: {
         active1: "",
-        active2: "active",
-        active3: "active"
-      }
+        active2: "",
+        active3: ""
+      },
     };
   },
   // mounted: function() {
   //     this.yincang();
   // },
+   computed: {
+    isReg: function () {
+      return this.classBox.active1==""&&this.classBox.active2==""&&this.classBox.active3==""
+    }
+  },
   methods: {
     keyDown(event) {
       if (event.keyCode == 13) {
@@ -67,9 +67,9 @@ export default {
       }
     },
     nameBlue() {
-        if(document.getElementById("userName").value==""){
-            this.classBox.active1="";
-        }
+      if (this.username == "") {
+        this.classBox.active1 = "";
+      }
       var that = this;
       this.$ajax
         .post("/api/username/check", {
@@ -77,9 +77,9 @@ export default {
         })
         .then(function(response) {
           if (response.data.status == 0) {
-              that.classBox.active1='active';
-          } else if(response.data.status == 1){
-              that.classBox.active1="";
+            that.classBox.active1 = 'active';
+          } else if (response.data.status == 1) {
+            that.classBox.active1 = "";
           }
         })
         .catch(function(error) {
@@ -87,19 +87,24 @@ export default {
         });
     },
     pwdBlue() {
-        var pwdLength = document.getElementById("userPwd").value.length;
-        var pwdNull = document.getElementById("userPwd").value;
-        if(pwdLength<6&&pwdNull!=""){
-            this.classBox.active2="active";
-        }else{
-            this.classBox.active2="";
-        }
+      if (this.psd.length < 6 && this.psd != "") {
+        this.classBox.active2 = "active";
+      } else {
+        this.classBox.active2 = "";
+      }
     },
-    confirmBlue() {},
+    confirmBlue() {
+      if (this.psd != this.confirm) {
+        this.classBox.active3 = "active";
+      } else {
+        this.classBox.active3 = "";
+      }
+    },
     regFun: function() {
-      // if (checkBox.checked) {
-      //   this.setCookie(this.username, this.psd, 7);
-      // }
+      if(!this.isReg||this.username==""||this.pwd==""||this.confirm==""){
+        console.log("chuguo")
+        return
+      }
       var that = this;
       this.$ajax
         .post("/api/register", {
@@ -170,8 +175,7 @@ export default {
     }
   }
   .right {
-    float: right;
-    // margin: 0 auto;
+    float: right; // margin: 0 auto;
     height: 405px;
     width: 400px;
     margin-top: 75px;
@@ -192,8 +196,7 @@ export default {
       .name,
       .confirm {
         width: 296px;
-        height: 44px;
-        // line-height: 44px;
+        height: 44px; // line-height: 44px;
         border: solid 1px #e5e5e5;
         margin-top: 30px;
         padding-left: 13px;
@@ -216,8 +219,7 @@ export default {
           height: 42px;
           line-height: 44px;
         }
-      }
-      //   .remember{
+      } //   .remember{
       //     font-size: 14px;
       //     height: 44px;
       //     line-height: 44px;
@@ -262,14 +264,12 @@ export default {
   }
   i {
     position: absolute;
-    display: none;
-    // display: block;
+    display: none; // display: block;
     font-style: normal;
     color: #ff4936;
     margin-top: 7px;
     padding-left: 58px;
-    width: 296px;
-    // text-align: center;
+    width: 296px; // text-align: center;
     font-size: 12px;
     &.active {
       display: block;

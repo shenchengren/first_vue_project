@@ -32,8 +32,8 @@ import Router from "vue-router";
 import Vue from "vue";
 import reg from "@/components/reg";
 
-// import {Utils, A} from '../common/utils';
-// let utils = new Utils();
+import Utils from '../common/utils';
+let utils = new Utils();
 // console.log(utils);
 Vue.use(Router);
 // let aaa = new A();
