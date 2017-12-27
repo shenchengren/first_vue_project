@@ -5,6 +5,12 @@
       "name": "admin",
       "pwd": "111",
       "isLogin": true
+    },
+    {
+      "id": "1002",
+      "name": "",
+      "pwd": "123",
+      "isLogin": true
     }
   ]
 }

@@ -65,3 +65,22 @@ app.post('/api/register', (req,res)=>{
     }
     res.json(resBody);
 });
+
+// register--username
+app.post('/api/username/check', (req,res)=>{
+    const payload = req.body;
+    let users = usersDb.value();
+    let resBody = {
+        status: 0,
+        // msg: 'The user name has been registered~'
+    };
+
+    let user = usersDb.find({name: payload.name}).value();
+    if(!user){
+        // usersDb.push(newUser).write();
+        resBody.status = 1;
+        // resBody.msg = 'You have been Registed successfully~';
+        // resBody.userName = newUser.name;
+    }
+    res.json(resBody);
+});

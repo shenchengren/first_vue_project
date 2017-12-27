@@ -32,12 +32,12 @@ import Router from "vue-router";
 import Vue from "vue";
 import reg from "@/components/reg";
 
-import {Utils, A} from '../common/utils';
-let utils = new Utils();
-console.log(utils);
+// import {Utils, A} from '../common/utils';
+// let utils = new Utils();
+// console.log(utils);
 Vue.use(Router);
-let aaa = new A();
-console.log(aaa.job);
+// let aaa = new A();
+// console.log(aaa.job);
 const router = new Router();
 export default {
   data() {
