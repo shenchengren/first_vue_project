@@ -10,14 +10,14 @@ a {
   text-decoration: none;
   color: #333;
 }
-
-// .clearfix:after {
-//   content: '.';
-//   display: block;
-//   height: 0;
-//   clear: both;
-//   visibility: hidden
-// }
+ol,ul {list-style:none;}
+.clearfix:after {
+  content: '.';
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden
+}
 
 
 // *html .clearfix {

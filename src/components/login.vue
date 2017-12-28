@@ -71,6 +71,7 @@ export default {
         .then(function(response) {
           if (response.data.status == 1) {
             that.setCookie("first_vue_code", 200, 7);
+            that.setCookie("first_vue_name",response.data.userName+"先生", 7);
             // that.$emit("isLogFn", response.data.name + "先生");
             that.$router.push({ path: "/shop" });
           } else {

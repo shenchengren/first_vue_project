@@ -4,6 +4,7 @@
        <div class="logtext"><span @click="goHome">热卖街</span><span class="logtext1">Remaijie.net</span></div>
         <ul class="clearfix">
             <li><router-link to="./">首页</router-link></li>
+            <li><router-link to="./list">商品列表</router-link></li>
             <li><router-link to="./shop">购物车</router-link></li>
             <li v-if="isShow"><router-link to="./login">登录</router-link></li>
             <li v-if="!isShow">{{name}}</li>
@@ -27,17 +28,19 @@ export default {
   },
   mounted() {
     if (this.getCookie("first_vue_code") == 200) {
-      console.log(this.getCookie("first_vue_code1"));
+      // console.log(this.getCookie("first_vue_code1"));
+      this.name=this.getCookie("first_vue_name")
       this.isShow = false;
     }
-    bus.$on('my-event', function(data){
-      console.log(data);
-    })
+    // bus.$on('my-event', function(data){
+    //   console.log(data);
+    // })
   },
   watch: {
     $route(to, from) {
       if (this.getCookie("first_vue_code") == 200) {
-        console.log(this.getCookie("first_vue_code1"));
+        // console.log(this.getCookie("first_vue_code1"));
+        this.name=this.getCookie("first_vue_name")
         this.isShow = false;
       }
     }
@@ -48,6 +51,7 @@ export default {
     },
     logOut() {
       this.clearCookie("first_vue_code");
+      this.clearCookie("first_vue_name");
       this.isShow = true;
       this.$router.push({ path: "/" });
     },
@@ -118,6 +122,9 @@ ul {
     padding-right: 15px;
     &:last-child {
       padding: 0;
+    }
+    a{
+      color: #e4e4e4;
     }
     a:hover {
       color: deeppink;

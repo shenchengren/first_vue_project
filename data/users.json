@@ -8,20 +8,8 @@
     },
     {
       "id": "1002",
-      "name": "sdf",
-      "pwd": "",
-      "isLogin": true
-    },
-    {
-      "id": "1003",
-      "name": "111",
-      "pwd": "222222",
-      "isLogin": true
-    },
-    {
-      "id": "1004",
-      "name": "1111",
-      "pwd": "2222222",
+      "name": "shenchengren",
+      "pwd": "123456",
       "isLogin": true
     }
   ]
