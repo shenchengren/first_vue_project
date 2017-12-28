@@ -1,14 +1,14 @@
 <template>
   <div class="list-box clearfix">
     <div class="list-seach">
-        <div class="search-author">
-          <label for="search-author">作者名：</label>
-          <input type="text" placeholder="请输入作者名">
-        </div>
+      <div class="search-author">
+        <label for="search-author">作者名：</label>
+        <input type="text" placeholder="请输入作者名">
+      </div>
     </div>
     <div class="list-body">
       <ul>
-        <li class="clearfix">
+        <li class="clearfix" v-for="item in items">
           <div class="left"><img src="http://img3m1.ddimg.cn/59/32/25182491-1_w_6.jpg" alt=""></div>
           <div class="right">
             <p class="top">
@@ -34,38 +34,58 @@
 // import bus from '../common/bus';
 
 export default {
-  //   mounted(){
-  //     bus.$emit('my-event', 'hello world');
-  //   }
+  data(){
+    return {
+      items:""
+    }
+  },
+  mounted(){
+
+  },
+  methods:{
+    getData(){
+      
+    },
+  }
 };
 </script>
 <style lang="scss" scoped>
 .list-box {
   width: 1000px;
   margin: 0 auto;
-  .left{
+  .left {
     float: left;
     width: 30%;
-    img{
+    img {
       width: 250px;
       height: 250px;
     }
   }
-  .right{
+  .right {
     float: right;
-    width: 70%;
-    // position: relative;
-    .top{
+    width: 70%; // position: relative;
+    .top {
       padding: 15px 0;
-    }
-    .introduce{
-      .content{
-      height: 100px;
-
+      span{
+        display: inline;
+        margin-right: 30px;
       }
     }
-    .bottom{
-      margin-top: 20px;
+    .introduce {
+      .content {
+        height: 108px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 5; //文本行数
+        overflow: hidden; // white-space:nowrap
+      }
+    }
+    .bottom {
+      margin-top: 40px;
+      span{
+        display: inline;
+        margin-right: 30px;
+      }
     }
   }
 }
