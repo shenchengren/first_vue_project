@@ -9,6 +9,7 @@ import reg from '@/components/reg';
 import inDex from '@/components/index';
 import shop from '@/components/shop';
 import list from "@/components/list"
+import dails from "@/components/book-dails"
 
 Vue.use(Router);
 let router = new Router();
@@ -42,7 +43,12 @@ export default new Router({
     {
       path:"/list",
       name:"list",
-      component:list
+      component:list,
+    },
+    {
+      path:"/list/dails",
+      name:"dails",
+      component:dails
     }
   ]
 })

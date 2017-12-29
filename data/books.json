@@ -144,7 +144,21 @@
             "stock": "135",
             "area": "China",
             "author": "萧红",
-            "smallImage": "http://img3m5.ddimg.cn/65/14/25182695-5_w_5.jpg"
+            "smallImage": "http://img3m5.ddimg.cn/65/14/25182695-5_w_5.jpg",
+            "details": {
+                "images": [
+                    "http://img58.ddimg.cn/99999990002303018.jpg",
+                    "http://img58.ddimg.cn/99999990002303018.jpg",
+                    "http://img58.ddimg.cn/99999990002303018.jpg"
+                ],
+                "summary": "法兰克福书展明星产品，人文科普童书诚意之作;极致工艺再现文明进程，精致设计再创科普经典;每个孩子都可能改变世界！（精装立体全球同步制作，3岁以上孩子适读）",
+                "publisher": "浙江文艺出版社",
+                "publishedTime": "2017年11月",
+                "originPrice": "¥158.00",
+                "edition": "1",
+                "page": 105,
+                "category": "图书>童书>7-10岁>科普/百科"
+            }
         },
         {
             "id": 1008,
