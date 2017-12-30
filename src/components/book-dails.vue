@@ -34,23 +34,23 @@ export default {
       item: ""
     };
   },
-  created() {
-    // let that=this;
-    // bus.$on('getDails', function(data){
-    //   console.log(data)
-    //   that.item=data
-    //   console.log(data);
-    // })
+  mounted() {
+    let that=this;
+    bus.$on('getDails', function(data){
+      console.log(data)
+      that.item=data
+      // console.log(data);
+    })
   },
-  watch: {
-    $route(to, from) {
-      if (this.getCookie("first_vue_code") == 200) {
-        // console.log(this.getCookie("first_vue_code1"));
-        this.name=this.getCookie("first_vue_name")
-        this.isShow = false;
-      }
-    }
-  },
+  // watch: {
+  //   $route(to, from) {
+  //     if (this.getCookie("first_vue_code") == 200) {
+  //       // console.log(this.getCookie("first_vue_code1"));
+  //       this.name=this.getCookie("first_vue_name")
+  //       this.isShow = false;
+  //     }
+  //   }
+  // },
   methods: {
     
   }

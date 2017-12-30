@@ -1,5 +1,6 @@
 <template>
   <div class="list-box clearfix">
+    <router-view />
     <div class="list-seach">
       <div class="search-author">
         <label for="search-author">作者名：</label>
@@ -34,6 +35,7 @@
         </li>
       </ul>
     </div>
+    
   </div>
 </template>
 <script>
@@ -67,12 +69,12 @@ export default {
         .catch(function(error) {});
     },
     bookDails(data) {
-      // console.log(data.id)
+      console.log(data)
       let listId = data.id;
       console.log(listId);
       // bus.$emit("getDails", data);
-      // this.$router.push({ name: "dails",params:{data.id} });
-      // this.$router.push({ name: 'dails', params: { listId }})
+      // this.$router.push({ name: "dails"});
+      this.$router.push({ name: 'dails', params: { listId}})
     },
     searchBtnAuthor() {
       this.items = [];

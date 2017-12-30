@@ -44,11 +44,13 @@ export default new Router({
       path:"/list",
       name:"list",
       component:list,
-    },
-    {
-      path:"/list/dails",
-      name:"dails",
-      component:dails
+      children: [
+        {
+          path:":id",
+          name:"dails",
+          component:dails
+        }
+      ]
     }
   ]
 })
