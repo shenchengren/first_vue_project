@@ -4,13 +4,15 @@
       "id": "1001",
       "name": "admin",
       "pwd": "111",
-      "isLogin": true
+      "isLogin": true,
+      "cart": []
     },
     {
       "id": "1002",
       "name": "shenchengren",
       "pwd": "123456",
-      "isLogin": true
+      "isLogin": true,
+      "cart": []
     }
   ]
 }

@@ -87,3 +87,21 @@ app.get('/api/books', (req,res)=>{
     let books = booksDb.value();
     res.send(books).end();
 });
+
+// add cart
+app.post('/api/users/:userId/cart', (req,res)=>{
+    // console.log(req.params);
+    let userId = req.params.userId;
+    let bookId = req.body.bookId;
+    console.log(bookId);
+
+    let user = usersDb.find({id: userId}).value();
+    if(user){
+        let book = booksDb.find({id: bookId}).value();
+        if(book){
+            let temp = usersDb.find({id: userId}).value();
+            temp.cart.push(book);
+        }
+    }
+    res.json({status: 1});
+});
