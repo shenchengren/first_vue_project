@@ -1,7 +1,7 @@
 <template >
     <div class="login-box clearfix">
         <div class="left">
-            <img src="../assets/logps.png" alt="">
+            <img src="../assets/images/logps.png" alt="">
         </div>
         <div class="right">
             <div class="loginForm">

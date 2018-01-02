@@ -1,7 +1,14 @@
+/*
+ * @Author: mikey.zhaopeng 
+ * @Date: 2018-01-02 17:40:03 
+ * @Last Modified by:   mikey.zhaopeng 
+ * @Last Modified time: 2018-01-02 17:40:03 
+ */
+
 <template >
   <div class="login-box clearfix">
     <div class="left">
-      <img src="../assets/logps.png" alt="">
+      <img src="../assets/images/logps.png" alt="">
     </div>
     <div class="right">
       <div class="loginForm">
@@ -52,9 +59,6 @@ export default {
       },
     };
   },
-  // mounted: function() {
-  //     this.yincang();
-  // },
    computed: {
     isReg: function () {
       return this.classBox.active1==""&&this.classBox.active2==""&&this.classBox.active3==""

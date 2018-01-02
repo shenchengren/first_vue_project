@@ -1,6 +1,13 @@
+/*
+ * @Author: mike 
+ * @Date: 2018-01-02 17:51:06 
+ * @Last Modified by: mike
+ * @Last Modified time: 2018-01-02 17:58:46
+ */
+
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1>{{ msg }</h1>
     <h2>Essential Links</h2>
     <ul>
       <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>

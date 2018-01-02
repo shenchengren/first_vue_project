@@ -1,3 +1,9 @@
+/*
+ * @Author: mike 
+ * @Date: 2018-01-02 17:50:49 
+ * @Last Modified by: mike
+ * @Last Modified time: 2018-01-02 17:58:28
+ */
 <template>
   <div class="list-box clearfix">
    <!-- sdf -->
@@ -13,7 +19,7 @@
             </p>
             <div class="introduce">
               <p class="title">介绍：</p>
-              <p class="content">{{item.stock}}</p>
+              <p class="content">{{item.details.summary}}</p>
             </div>
             <p class="bottom">
               <span class="inventory">库存：{{item.stock}}</span>
@@ -26,7 +32,7 @@
   </div>
 </template>
 <script>
-import bus from '../common/bus';
+import bus from "../common/bus";
 
 export default {
   data() {
@@ -34,25 +40,38 @@ export default {
       item: ""
     };
   },
-  mounted() {
-    let that=this;
-    bus.$on('getDails', function(data){
-      console.log(data)
-      that.item=data
-      // console.log(data);
-    })
+  watch: {
+    $route(to, from) {
+      let listId = this.$route.params.listId;
+      this.getData(listId);
+    }
   },
-  // watch: {
-  //   $route(to, from) {
-  //     if (this.getCookie("first_vue_code") == 200) {
-  //       // console.log(this.getCookie("first_vue_code1"));
-  //       this.name=this.getCookie("first_vue_name")
-  //       this.isShow = false;
-  //     }
-  //   }
-  // },
+  mounted() {
+    // console.log(this.$route.params.listId);
+    let listId = this.$route.params.listId;
+    this.getData(listId);
+  },
   methods: {
-    
+    getData(listId) {
+      const that = this;
+      this.$ajax
+        .get("/api/books", {})
+        .then(function(response) {
+          that.searchBtnId(listId, response.data);
+        })
+        .catch(function(error) {});
+    },
+
+    searchBtnId(id, data) {
+      console.log(data);
+      let that = this;
+      data.forEach(function(ele, index) {
+        if (ele.id == id) {
+          // if (ele.author.indexOf(that.searchAuthor) >= 0) {
+          that.item = ele;
+        }
+      });
+    }
   }
 };
 </script>
@@ -60,19 +79,19 @@ export default {
 .list-box {
   width: 1000px;
   margin: 0 auto;
-  .list-seach{
+  .list-seach {
     height: 40px;
     line-height: 40px;
-    font-size:16px;
-    padding-left:80px; 
+    font-size: 16px;
+    padding-left: 80px;
     margin-top: 25px;
     background: #ddd;
     border-radius: 2px;
-    input{
-      font-size:16px;
+    input {
+      font-size: 16px;
       padding-left: 10px;
     }
-    button{
+    button {
       padding: 1px 8px;
     }
   }
@@ -80,8 +99,8 @@ export default {
     border: 1px solid #ddd;
     margin-top: 25px;
     border-radius: 2px;
-    box-shadow: 7px 7px 15px #ddd;   
-    padding: 10px 0; 
+    box-shadow: 7px 7px 15px #ddd;
+    padding: 10px 0;
   }
   .left {
     float: left;
@@ -107,7 +126,7 @@ export default {
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 5; //文本行数
-        overflow: hidden; 
+        overflow: hidden;
       }
     }
     .bottom {

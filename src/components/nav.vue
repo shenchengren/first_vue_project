@@ -3,13 +3,13 @@
    <div class="nav clearfix">
        <div class="logtext"><span @click="goHome">热卖街</span><span class="logtext1">Remaijie.net</span></div>
         <ul class="clearfix">
-            <li><router-link to="./">首页</router-link></li>
-            <li><router-link to="./list">商品列表</router-link></li>
-            <li><router-link to="./shop">购物车</router-link></li>
-            <li v-if="isShow"><router-link to="./login">登录</router-link></li>
+            <li><router-link :to="{name: 'index'}">首页</router-link></li>
+            <li><router-link :to="{name: 'list'}">商品列表</router-link></li>
+            <li><router-link :to="{name: 'shop'}">购物车</router-link></li>
+            <li v-if="isShow"><router-link :to="{name: 'login'}">登录</router-link></li>
             <li v-if="!isShow">{{name}}</li>
             <li v-if="!isShow" @click="logOut"><router-link to="">登出</router-link></li>
-            <li><router-link to="./reg">免费注册</router-link></li>
+            <li><router-link :to="{name: 'reg'}">免费注册</router-link></li>
         </ul>   
   </div>
 </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="list-box clearfix">
     <router-view />
-    <div class="list-seach">
+    <div class="list-seach" v-if="isRouter">
       <div class="search-author">
         <label for="search-author">作者名：</label>
         <input type="text" placeholder="请输入作者名" id="search-author" v-model="searchAuthor">
@@ -13,7 +13,7 @@
         <button @click="searchBtnAdress">搜索</button>
       </div>
     </div>
-    <div class="list-body">
+    <div class="list-body" v-if="isRouter">
       <ul>
         <li class="clearfix" v-for="item in items" @click="bookDails(item)">
           <div class="left"><img :src="item.smallImage" alt=""></div>
@@ -51,11 +51,27 @@ export default {
       searchAuthor: "",
       searchAdress: "",
       items: "",
-      itemsBox: ""
+      itemsBox: "",
+      isRouter:true
     };
   },
   mounted() {
+    console.log(this.$route.params.listId)
+    if(this.$route.params.listId){
+      this.isRouter=false;
+    }else{
+      this.isRouter=true;
+    }
     this.getData();
+  },
+  watch: {
+    $route(to, from) {
+      if(this.$route.params.listId){
+      this.isRouter=false;
+    }else{
+      this.isRouter=true;
+    }
+    }
   },
   methods: {
     getData() {

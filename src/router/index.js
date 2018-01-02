@@ -40,17 +40,27 @@ export default new Router({
       name:"shop",
       component:shop,
     },
+    // {
+    //   path:"/list",
+    //   name:"list",
+    //   component:list,
+    // },
     {
       path:"/list",
       name:"list",
       component:list,
       children: [
         {
-          path:":id",
+          path:":listId",
           name:"dails",
           component:dails
         }
       ]
-    }
+    },
+    // {
+    //   path:"/:listId",
+    //   name:"dails",
+    //   component:dails,
+    // }
   ]
 })
