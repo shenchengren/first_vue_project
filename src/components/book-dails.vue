@@ -10,20 +10,20 @@
     <div class="list-body">
       <ul>
         <li class="clearfix">
-          <div class="left"><img :src="item.smallImage" alt=""></div>
+          <div class="left"><img :src="myMessage.smallImage" alt=""></div>
           <div class="right">
             <p class="top">
-              <span class="book-name">书名：{{item.bookName}}</span>
-              <span class="book-anthor">作者：{{item.author}}</span>
-              <span class="countries">国家：{{item.area}}</span>
+              <span class="book-name">书名：{{myMessage.bookName}}</span>
+              <span class="book-anthor">作者：{{myMessage.author}}</span>
+              <span class="countries">国家：{{myMessage.area}}</span>
             </p>
             <div class="introduce">
               <p class="title">介绍：</p>
-              <p class="content">{{item.details.summary}}</p>
+              <p class="content">{{items.summary}}</p>
             </div>
             <p class="bottom">
-              <span class="inventory">库存：{{item.stock}}</span>
-              <span class="price">价格：{{item.price}}</span>
+              <span class="inventory">库存：{{myMessage.stock}}</span>
+              <span @click="aaa" class="price">价格：{{item.price}}</span>
             </p>
           </div>
         </li>
@@ -35,9 +35,11 @@
 import bus from "../common/bus";
 
 export default {
+  props: ['myMessage'],
   data() {
     return {
-      item: ""
+      item: "",
+      items:""
     };
   },
   watch: {
@@ -61,14 +63,18 @@ export default {
         })
         .catch(function(error) {});
     },
-
+    aaa(){
+      console.log(this.myMessage)
+    },
     searchBtnId(id, data) {
-      console.log(data);
+      // console.log(data);
       let that = this;
       data.forEach(function(ele, index) {
         if (ele.id == id) {
           // if (ele.author.indexOf(that.searchAuthor) >= 0) {
           that.item = ele;
+          that.items = ele.details;
+          console.log(that.items)
         }
       });
     }

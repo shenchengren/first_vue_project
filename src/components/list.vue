@@ -1,6 +1,6 @@
 <template>
   <div class="list-box clearfix">
-    <router-view />
+    <router-view :my-message="parentMsg"/>
     <div class="list-seach" v-if="isRouter">
       <div class="search-author">
         <label for="search-author">作者名：</label>
@@ -15,7 +15,7 @@
     </div>
     <div class="list-body" v-if="isRouter">
       <ul>
-        <li class="clearfix" v-for="item in items" @click="bookDails(item)">
+        <li class="clearfix" v-for="item in items" @click="bookDails(item)" :key="item.id">
           <div class="left"><img :src="item.smallImage" alt=""></div>
           <div class="right">
             <p class="top">
@@ -52,7 +52,8 @@ export default {
       searchAdress: "",
       items: "",
       itemsBox: "",
-      isRouter:true
+      isRouter:true,
+      parentMsg:""
     };
   },
   mounted() {
