@@ -1,29 +1,23 @@
-/*
- * @Author: mike 
- * @Date: 2018-01-02 17:50:49 
- * @Last Modified by: mike
- * @Last Modified time: 2018-01-02 17:58:28
- */
 <template>
   <div class="list-box clearfix">
-   <!-- sdf -->
     <div class="list-body">
       <ul>
         <li class="clearfix">
-          <div class="left"><img :src="myMessage.smallImage" alt=""></div>
+          <div class="left"><img :src="item.smallImage" alt=""></div>
           <div class="right">
             <p class="top">
-              <span class="book-name">书名：{{myMessage.bookName}}</span>
-              <span class="book-anthor">作者：{{myMessage.author}}</span>
-              <span class="countries">国家：{{myMessage.area}}</span>
+              <span class="book-name">书名：{{item.bookName}}</span>
+              <span class="book-anthor">作者：{{item.author}}</span>
+              <span class="countries">国家：{{item.area}}</span>
             </p>
             <div class="introduce">
               <p class="title">介绍：</p>
-              <p class="content">{{items.summary}}</p>
+              <p class="content">{{item.details && item.details.summary}}</p>
             </div>
             <p class="bottom">
-              <span class="inventory">库存：{{myMessage.stock}}</span>
-              <span @click="aaa" class="price">价格：{{item.price}}</span>
+              <span class="inventory">库存：{{item.stock}}</span>
+              <span class="price">价格：{{item.price}}</span>
+              <span class="cart" @click="cartFn">加入购物车</span>
             </p>
           </div>
         </li>
@@ -32,51 +26,29 @@
   </div>
 </template>
 <script>
-import bus from "../common/bus";
+// import bus from "../common/bus";
 
 export default {
-  props: ['myMessage'],
   data() {
     return {
       item: "",
-      items:""
     };
   },
   watch: {
-    $route(to, from) {
-      let listId = this.$route.params.listId;
-      this.getData(listId);
-    }
+    //监听路由---用户自己改变参数专用
+    // $route(to, from) {
+    //   let listId = this.$route.params.listId;
+    //   this.getData(listId);
+    // }
   },
   mounted() {
-    // console.log(this.$route.params.listId);
-    let listId = this.$route.params.listId;
-    this.getData(listId);
+    //获取sessionStorage获取数据来渲染详情页
+    let objDate = sessionStorage.getItem("bookDetails")
+    this.item = JSON.parse(objDate) 
   },
   methods: {
-    getData(listId) {
-      const that = this;
-      this.$ajax
-        .get("/api/books", {})
-        .then(function(response) {
-          that.searchBtnId(listId, response.data);
-        })
-        .catch(function(error) {});
-    },
-    aaa(){
-      console.log(this.myMessage)
-    },
-    searchBtnId(id, data) {
-      // console.log(data);
-      let that = this;
-      data.forEach(function(ele, index) {
-        if (ele.id == id) {
-          // if (ele.author.indexOf(that.searchAuthor) >= 0) {
-          that.item = ele;
-          that.items = ele.details;
-          console.log(that.items)
-        }
-      });
+    cartFn(){
+      
     }
   }
 };
@@ -136,10 +108,25 @@ export default {
       }
     }
     .bottom {
-      margin-top: 40px;
+      margin-top: 24px;
       span {
-        display: inline;
+        display: inline-block;
         margin-right: 30px;
+        vertical-align: middle
+      }
+      .cart{
+        // display: inline-block;
+        float: right;
+        background-color: #ff4936;
+        padding: 10px;
+        margin-top:-12px; 
+        // margin-right: 40px;
+        border-radius: 4px;
+        color: #fff;
+        &:hover{
+          cursor: pointer;
+          background-color:  #f42517
+        }
       }
     }
   }

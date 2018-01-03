@@ -4,11 +4,11 @@
   </div>
 </template>
 <script>
-    import bus from '../common/bus';
+    // import bus from '../common/bus';
 
     export default{
       mounted(){
-        bus.$emit('my-event', 'hello world');
+        // bus.$emit('my-event', 'hello world');
       }
     }
 </script>

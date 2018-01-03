@@ -1,11 +1,13 @@
 <template>
-    <div id="app">
-        <router-view></router-view>
+    <div id="home">
+        <app-nav></app-nav>
+            <router-view @increment="incrementTotal" :zhuangtai="fuzhuangtai" v-show="!isTrue"></router-view>
+        <span v-show="isTrue">{{msg}}</span>
     </div>
 </template>
 
 <script>
-// import Nav from "./components/nav";
+import Nav from "./home/nav";
 export default {
   name: "app",
   data() {
@@ -16,9 +18,9 @@ export default {
       isTrue: false
     };
   },
-  // components: {
-  //   "app-nav": Nav
-  // },
+  components: {
+    "app-nav": Nav
+  },
   mounted() {},
   watch: {
     $route(to, from) {
@@ -31,7 +33,7 @@ export default {
         setTimeout(function() {
           that.isTrue = false;
 
-          that.$router.push({ path: "/login" });
+          that.$router.push({ name: "login" });
         }, 1500);
       }
     }

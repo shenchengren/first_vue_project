@@ -1,7 +1,7 @@
 <template >
     <div class="login-box clearfix">
         <div class="left">
-            <img src="../assets/images/logps.png" alt="">
+            <img src="../../assets/images/logps.png" alt="">
         </div>
         <div class="right">
             <div class="loginForm">
@@ -30,10 +30,10 @@
 <script>
 import Router from "vue-router";
 import Vue from "vue";
-import reg from "@/components/reg";
+// import reg from "@/components/reg";
 
-import Utils from '../common/utils';
-let utils = new Utils();
+import Utils from '../../common/utils';
+// let utils = new Utils();
 // console.log(utils);
 Vue.use(Router);
 // let aaa = new A();
@@ -58,7 +58,7 @@ export default {
       }
     },
     loginFun: function() {
-      var checkBox = document.getElementById("checkBox");
+      // var checkBox = document.getElementById("checkBox");
       // if (checkBox.checked) {
       //   this.setCookie(this.username, this.psd, 7);
       // }
@@ -70,8 +70,8 @@ export default {
         })
         .then(function(response) {
           if (response.data.status == 1) {
-            that.setCookie("first_vue_code", 200, 7);
-            that.setCookie("first_vue_name",response.data.userName+"先生", 7);
+            Utils.setCookie("first_vue_code", 200, 7);
+            Utils.setCookie("first_vue_name",response.data.userName+"先生", 7);
             // that.$emit("isLogFn", response.data.name + "先生");
             that.$router.push({ path: "/shop" });
           } else {
@@ -88,36 +88,6 @@ export default {
     },
     goHome() {
       this.$router.push({ path: "/" });
-    },
-    //设置cookie
-    setCookie(cname, cvalue, exdays){
-      utils.setCookie(cname, cvalue, exdays)
-    },
-    //获取cookie
-    getCookie: function(cname) {
-      var name = cname + "=";
-      var ca = document.cookie.split(";");
-      for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == " ") c = c.substring(1);
-        if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
-      }
-      return "";
-    },
-    //清除cookie
-    clearCookie: function() {
-      this.setCookie("username", "", -1);
-    },
-    checkCookie: function() {
-      var user = this.getCookie("username");
-      if (user != "") {
-        alert("Welcome again " + user);
-      } else {
-        user = prompt("Please enter your name:", "");
-        if (user != "" && user != null) {
-          this.setCookie("username", user, 365);
-        }
-      }
     }
   }
 };

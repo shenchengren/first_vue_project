@@ -1,6 +1,6 @@
 <template>
   <div class="list-box clearfix">
-    <router-view :my-message="parentMsg"/>
+    <router-view />
     <div class="list-seach" v-if="isRouter">
       <div class="search-author">
         <label for="search-author">作者名：</label>
@@ -15,8 +15,8 @@
     </div>
     <div class="list-body" v-if="isRouter">
       <ul>
-        <li class="clearfix" v-for="item in items" @click="bookDails(item)" :key="item.id">
-          <div class="left"><img :src="item.smallImage" alt=""></div>
+        <li class="clearfix" v-for="item in items" :key="item.id">
+          <div class="left"><img :src="item.smallImage" @click="bookDetails(item)" alt=""></div>
           <div class="right">
             <p class="top">
               <span class="book-name">书名：{{item.bookName}}</span>
@@ -30,6 +30,7 @@
             <p class="bottom">
               <span class="inventory">库存：{{item.stock}}</span>
               <span class="price">价格：{{item.price}}</span>
+              <span class="cart" @click="cartFn(item)">加入购物车</span>
             </p>
           </div>
         </li>
@@ -39,7 +40,7 @@
   </div>
 </template>
 <script>
-import bus from "../common/bus";
+// import bus from "../common/bus";
 import Router from "vue-router";
 import Vue from "vue";
 Vue.use(Router);
@@ -48,16 +49,15 @@ const router = new Router();
 export default {
   data() {
     return {
-      searchAuthor: "",
-      searchAdress: "",
-      items: "",
-      itemsBox: "",
-      isRouter:true,
-      parentMsg:""
+      searchAuthor: "",//监听作者--搜索作者
+      searchAdress: "",//监听地址--搜索地址
+      items: "",//循环列表用
+      itemsBox: "",//循环列表用----搜索的时候
+      isRouter:true,//隐藏列表页
     };
   },
   mounted() {
-    console.log(this.$route.params.listId)
+    //获取列表页后面有没有id参数来判断---有参数说明是详情页--隐藏列表页
     if(this.$route.params.listId){
       this.isRouter=false;
     }else{
@@ -66,6 +66,7 @@ export default {
     this.getData();
   },
   watch: {
+    //获取列表页后面有没有id参数来判断---有参数说明是详情页--隐藏列表页（用户自定义改变参数--监听路由）
     $route(to, from) {
       if(this.$route.params.listId){
       this.isRouter=false;
@@ -75,24 +76,26 @@ export default {
     }
   },
   methods: {
+    //获取列表数据
     getData() {
       const that = this;
       this.$ajax
         .get("/api/books", {})
         .then(function(response) {
-          that.items = response.data;
-          that.itemsBox = response.data;
+          that.items = response.data;//循环列表
+          that.itemsBox = response.data;//搜索专用
         })
         .catch(function(error) {});
     },
-    bookDails(data) {
-      console.log(data)
+    //点击列表项--进入详情页
+    bookDetails(data) {
       let listId = data.id;
-      console.log(listId);
-      // bus.$emit("getDails", data);
-      // this.$router.push({ name: "dails"});
-      this.$router.push({ name: 'dails', params: { listId}})
+      let jsonData = JSON.stringify(data);
+
+      sessionStorage.setItem("bookDetails",jsonData)
+      this.$router.push({ name: 'details', params: { listId}})
     },
+    //用作者赛选
     searchBtnAuthor() {
       this.items = [];
       let that = this;
@@ -103,6 +106,7 @@ export default {
         }
       });
     },
+    //用地区赛选
     searchBtnAdress() {
       this.items = [];
       let that = this;
@@ -111,6 +115,9 @@ export default {
           that.items.push(ele);
         }
       });
+    },
+    cartFn(data){
+
     }
   }
 };
@@ -178,10 +185,25 @@ export default {
       }
     }
     .bottom {
-      margin-top: 34px;
+      margin-top: 24px;
       span {
-        display: inline;
+        display: inline-block;
         margin-right: 30px;
+        vertical-align: middle;
+      }
+      .cart{
+        // display: block;
+        float: right;
+        background-color: #ff4936;
+        padding: 10px;
+        margin-top:-12px; 
+        // margin-right: 40px;
+        border-radius: 4px;
+        color: #fff;
+        &:hover{
+          cursor: pointer;
+          background-color:  #f42517
+        }
       }
     }
   }

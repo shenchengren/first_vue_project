@@ -46,7 +46,8 @@ app.post('/api/register', (req,res)=>{
         id: (parseInt(users[users.length-1].id) + 1).toString(),
         name: payload.name,
         pwd: payload.pwd,
-        isLogin: true
+        isLogin: true,
+        cart:[]
     };
     let resBody = {
         status: 0,

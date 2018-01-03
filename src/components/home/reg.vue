@@ -1,14 +1,7 @@
-/*
- * @Author: mikey.zhaopeng 
- * @Date: 2018-01-02 17:40:03 
- * @Last Modified by:   mikey.zhaopeng 
- * @Last Modified time: 2018-01-02 17:40:03 
- */
-
 <template >
   <div class="login-box clearfix">
     <div class="left">
-      <img src="../assets/images/logps.png" alt="">
+      <img src="../../assets/images/logps.png" alt="">
     </div>
     <div class="right">
       <div class="loginForm">
@@ -40,7 +33,7 @@
 <script>
 import Router from "vue-router";
 import Vue from "vue";
-import reg from "@/components/reg";
+import Utils from "../../common/utils"
 
 Vue.use(Router);
 const router = new Router();
@@ -56,20 +49,27 @@ export default {
         active1: "",
         active2: "",
         active3: ""
-      },
+      }
     };
   },
-   computed: {
-    isReg: function () {
-      return this.classBox.active1==""&&this.classBox.active2==""&&this.classBox.active3==""
+  computed: {
+    // 计算是否有错误提示
+    isReg: function() {
+      return (
+        this.classBox.active1 == "" &&
+        this.classBox.active2 == "" &&
+        this.classBox.active3 == ""
+      );
     }
   },
   methods: {
+    // 回车 事件
     keyDown(event) {
       if (event.keyCode == 13) {
         this.regFun();
       }
     },
+    // 监听名字重复
     nameBlue() {
       if (this.username == "") {
         this.classBox.active1 = "";
@@ -77,11 +77,11 @@ export default {
       var that = this;
       this.$ajax
         .post("/api/username/check", {
-          name: that.username,
+          name: that.username
         })
         .then(function(response) {
           if (response.data.status == 0) {
-            that.classBox.active1 = 'active';
+            that.classBox.active1 = "active";
           } else if (response.data.status == 1) {
             that.classBox.active1 = "";
           }
@@ -90,6 +90,7 @@ export default {
           console.log(error);
         });
     },
+    // 监听密码输入
     pwdBlue() {
       if (this.psd.length < 6 && this.psd != "") {
         this.classBox.active2 = "active";
@@ -97,6 +98,7 @@ export default {
         this.classBox.active2 = "";
       }
     },
+    // 再次输入密码
     confirmBlue() {
       if (this.psd != this.confirm) {
         this.classBox.active3 = "active";
@@ -105,9 +107,14 @@ export default {
       }
     },
     regFun: function() {
-      if(!this.isReg||this.username==""||this.pwd==""||this.confirm==""){
-        console.log("chuguo")
-        return
+      if (
+        // 判断注册资料正确
+        !this.isReg ||
+        this.username == "" ||
+        this.pwd == "" ||
+        this.confirm == ""
+      ) {
+        return;
       }
       var that = this;
       this.$ajax
@@ -117,10 +124,12 @@ export default {
         })
         .then(function(response) {
           if (response.data.status == 1) {
-            // that.setCookie("first_vue_code", 200, 7);
-            // that.$emit("isLogFn", response.data.name + "先生");
-            // that.$router.push({ path: "/shop" });
+            // 注册成功跳转到购物车页面
+            Utils.setCookie("first_vue_code", 200, 7);
+            Utils.setCookie("first_vue_name",response.data.userName+"先生", 7);
+            that.$router.push({ path: "/shop" });
           } else {
+            // 用户名已被注册
             that.msg = response.data.msg;
             that.isTrue = true;
             setTimeout(function() {
@@ -134,36 +143,6 @@ export default {
     },
     goHome() {
       this.$router.push({ path: "/" });
-    },
-    //设置cookie
-    setCookie(cname, cvalue, exdays) {
-      utils.setCookie(cname, cvalue, exdays);
-    },
-    //获取cookie
-    getCookie: function(cname) {
-      var name = cname + "=";
-      var ca = document.cookie.split(";");
-      for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == " ") c = c.substring(1);
-        if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
-      }
-      return "";
-    },
-    //清除cookie
-    clearCookie: function() {
-      this.setCookie("username", "", -1);
-    },
-    checkCookie: function() {
-      var user = this.getCookie("username");
-      if (user != "") {
-        alert("Welcome again " + user);
-      } else {
-        user = prompt("Please enter your name:", "");
-        if (user != "" && user != null) {
-          this.setCookie("username", user, 365);
-        }
-      }
     }
   }
 };
