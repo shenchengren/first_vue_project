@@ -8,6 +8,7 @@
 
 <script>
 import Nav from "./home/nav";
+import utils from "@/common/utils"
 export default {
   name: "app",
   data() {
@@ -26,13 +27,12 @@ export default {
     $route(to, from) {
       if (
         this.$route.path == "/shop" &&
-        this.getCookie("first_vue_code") != 200
+        utils.getCookie("first_vue_code") != 200
       ) {
         this.isTrue = true;
         var that = this;
         setTimeout(function() {
           that.isTrue = false;
-
           that.$router.push({ name: "login" });
         }, 1500);
       }
@@ -42,16 +42,6 @@ export default {
     incrementTotal(e) {
       this.isShow = e;
     },
-    getCookie: function(cname) {
-      var name = cname + "=";
-      var ca = document.cookie.split(";");
-      for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == " ") c = c.substring(1);
-        if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
-      }
-      return "";
-    }
   }
 };
 </script>

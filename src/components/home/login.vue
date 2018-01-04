@@ -32,7 +32,7 @@ import Router from "vue-router";
 import Vue from "vue";
 // import reg from "@/components/reg";
 
-import Utils from '../../common/utils';
+import Utils from '@/common/utils';
 // let utils = new Utils();
 // console.log(utils);
 Vue.use(Router);
@@ -72,6 +72,7 @@ export default {
           if (response.data.status == 1) {
             Utils.setCookie("first_vue_code", 200, 7);
             Utils.setCookie("first_vue_name",response.data.userName+"先生", 7);
+            Utils.setCookie("first_vue_id",response.data.userId, 7);
             // that.$emit("isLogFn", response.data.name + "先生");
             that.$router.push({ path: "/shop" });
           } else {

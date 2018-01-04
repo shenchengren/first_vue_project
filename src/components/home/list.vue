@@ -35,7 +35,9 @@
           </div>
         </li>
       </ul>
+      <span class="is-msg" v-show="isTrue">{{msg}}</span>
     </div>
+    
     
   </div>
 </template>
@@ -43,6 +45,7 @@
 // import bus from "../common/bus";
 import Router from "vue-router";
 import Vue from "vue";
+import utils from "@/common/utils"
 Vue.use(Router);
 const router = new Router();
 
@@ -54,6 +57,8 @@ export default {
       items: "",//循环列表用
       itemsBox: "",//循环列表用----搜索的时候
       isRouter:true,//隐藏列表页
+      msg: "请先登录",
+      isTrue: false
     };
   },
   mounted() {
@@ -82,14 +87,14 @@ export default {
       this.$ajax
         .get("/api/books", {})
         .then(function(response) {
-          that.items = response.data;//循环列表
+          that.items    = response.data;//循环列表
           that.itemsBox = response.data;//搜索专用
         })
         .catch(function(error) {});
     },
     //点击列表项--进入详情页
     bookDetails(data) {
-      let listId = data.id;
+      let listId   = data.id;
       let jsonData = JSON.stringify(data);
 
       sessionStorage.setItem("bookDetails",jsonData)
@@ -98,7 +103,7 @@ export default {
     //用作者赛选
     searchBtnAuthor() {
       this.items = [];
-      let that = this;
+      let that   = this;
       this.itemsBox.forEach(function(ele, index) {
         // if(ele.author==that.searchAuthor){
         if (ele.author.indexOf(that.searchAuthor) >= 0) {
@@ -109,7 +114,7 @@ export default {
     //用地区赛选
     searchBtnAdress() {
       this.items = [];
-      let that = this;
+      let that   = this;
       this.itemsBox.forEach(function(ele, index) {
         if (ele.area == that.searchAdress) {
           that.items.push(ele);
@@ -117,7 +122,37 @@ export default {
       });
     },
     cartFn(data){
-
+      if (utils.getCookie("first_vue_code") != "200"){
+        console.log(utils.getCookie("first_vue_code"))
+        this.msg = '请先登录';
+        this.isTrue = true;
+        let self    = this;
+        setTimeout(function() {
+          self.isTrue = false;
+          // that.$router.push({ name: "login" });
+        }, 1500);
+      }else{
+        let userId = utils.getCookie("first_vue_id");
+        let bookId = data.id;
+        let that   = this;
+        let url    = '/api/users/'+userId+'/cart';
+        console.log(url)
+        this.$ajax.post(url,{
+          userId:userId,
+          bookId:bookId
+        }).then(function(response){
+          that.msg = '添加成功';
+          that.isTrue = true;
+          // let self    = this;
+          setTimeout(function() {
+            
+            that.isTrue = false;
+            // that.$router.push({ name: "login" });
+          }, 1500);
+        }).catch(function(error){
+          console.log(error)
+        })
+      }
     }
   }
 };
@@ -206,6 +241,20 @@ export default {
         }
       }
     }
+  }
+  .is-msg{
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    background: #000;
+    opacity: 0.5;
+    color: white;
+    font-size: 28px;
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    width: 300px;
+    margin-left: -150px;
   }
 }
 </style>

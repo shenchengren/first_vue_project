@@ -49,6 +49,7 @@ export default {
     logOut() {
       Utils.clearCookie("first_vue_code");
       Utils.clearCookie("first_vue_name");
+      Utils.clearCookie("first_vue_id");
       this.isShow = true;
       this.$router.push({ path: "/" });
     },

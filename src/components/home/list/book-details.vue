@@ -32,6 +32,8 @@ export default {
   data() {
     return {
       item: "",
+      msg: "请先登录",
+      isTrue: false
     };
   },
   watch: {

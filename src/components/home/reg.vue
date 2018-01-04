@@ -127,6 +127,7 @@ export default {
             // 注册成功跳转到购物车页面
             Utils.setCookie("first_vue_code", 200, 7);
             Utils.setCookie("first_vue_name",response.data.userName+"先生", 7);
+            Utils.setCookie("first_vue_id",response.data.userId, 7);
             that.$router.push({ path: "/shop" });
           } else {
             // 用户名已被注册
