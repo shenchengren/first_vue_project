@@ -94,7 +94,7 @@ ul {
     float: left;
     list-style: none;
     color: white;
-    padding-right: 15px;
+    padding-left: 15px;
     &:last-child {
       padding: 0;
     }

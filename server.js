@@ -93,21 +93,13 @@ app.get('/api/books', (req,res)=>{
 
 // add cart
 app.post('/api/users/:userId/cart', (req,res)=>{
-    // console.log(app)
-    // console.log(req.params);
     let userId = req.params.userId;
     let bookId = req.body.bookId;
-    console.log(bookId);
-
     let user = usersDb.find({id: userId}).value();
     if(user){
-        console.log(user)
         let book = booksDb.find({id: bookId}).value();
         if(book){
-            console.log(book)
             let temp = usersDb.find({id: userId})
-            console.log(temp);
-            console.log(temp.cart);
             temp.get('cart').push(book).write();
         }
     }

@@ -121,7 +121,9 @@ export default {
         }
       });
     },
+    //加入购物车
     cartFn(data){
+      // 判断是否是登录状态
       if (utils.getCookie("first_vue_code") != "200"){
         console.log(utils.getCookie("first_vue_code"))
         this.msg = '请先登录';
@@ -129,7 +131,6 @@ export default {
         let self    = this;
         setTimeout(function() {
           self.isTrue = false;
-          // that.$router.push({ name: "login" });
         }, 1500);
       }else{
         let userId = utils.getCookie("first_vue_id");
@@ -143,11 +144,8 @@ export default {
         }).then(function(response){
           that.msg = '添加成功';
           that.isTrue = true;
-          // let self    = this;
           setTimeout(function() {
-            
             that.isTrue = false;
-            // that.$router.push({ name: "login" });
           }, 1500);
         }).catch(function(error){
           console.log(error)
