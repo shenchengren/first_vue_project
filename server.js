@@ -105,3 +105,46 @@ app.post('/api/users/:userId/cart', (req,res)=>{
     }
     res.json({status: 1});
 });
+app.post('/api/users/:userId/delcart', (req,res)=>{
+    // db('songs').remove({ title: 'low!' })
+    console.log("进来了")
+    let userId = req.params.userId;
+    let bookId = req.body.bookId;
+    let userId1 = req.body.userId;
+    let user = usersDb.find({id: userId}).value();
+    let cart = usersDb.find({id: userId}).get("cart")
+    // console.log(req.body)
+    // console.log(userId1);
+    // console.log(bookId);
+    console.log(user);
+    console.log("1111:",cart);
+    if(user){
+        Db.usersDb.remove({id: 1004});
+        console.log("delete success!")
+        // let book = booksDb.find({id: bookId}).value();
+        // if(book){
+        //     let temp = usersDb.find({id: userId})
+        //     temp.get('cart').push(book).write();
+        // }
+
+    }
+    res.json({status: 1});
+});
+// get cart
+app.post('/api/getcard', (req,res)=>{
+    // console.log(222)
+    let payload = req.body;
+    let resBody = {
+        userId:"",
+        status: 0,
+        cart:[]
+    };
+    let user = usersDb.find({id: payload.userid}).value();
+    if(user && payload.userid === user.id){
+        // console.log(user)
+        resBody.status = 1;
+        resBody.userId=user.id;
+        resBody.cart=user.cart;
+    }
+    res.json(resBody);
+});

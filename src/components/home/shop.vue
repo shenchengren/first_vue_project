@@ -1,13 +1,14 @@
 <template>
   <div class="shop-body clearfix">
     <div class="shop-content" v-if="content">
+      <span class="is-msg" v-show="isTrue">{{msg}}</span>
       <div class="check-all">
         <input type="checkbox" name="" id="checkAll">
         <label for="checkAll">全选</label>
       </div>
       <ul>
         <li class="book" v-for="book in books" :key="book.id">
-          <p class="title">书名：{{book.id}}</p>
+          <p class="title">书名：{{book.id}}<img src="../../assets/images/close.svg" alt="" @click="delFn"></p>
           <div class="content">
             <div class="book-check">
               <input type="checkbox" name="" id="">
@@ -17,13 +18,14 @@
             </div>
             <div class="summary"><b>简介：</b>{{book.details && book.details.summary}}</div>
             <div class="pricebox">
-              <span class="prive-add">总价：￥50.00</span>
+              <span class="prive-add">总价：{{qqq&&"111"}}</span>
               <span class="price">单价：￥{{book.price}}</span>
             </div>
             <div class="numbox">
-              <img src="../../assets/images/minus.svg" alt="" class="minus">
-              <span class="num">1</span>
-              <img src="../../assets/images/add.svg" alt="" class="add">
+              <img src="../../assets/images/minus.svg" alt="" class="minus" @click="minusFn">
+              <!-- <span class="num">1</span> -->
+              <input type="text" value="1" class="num" v-model="qqq">
+              <img src="../../assets/images/add.svg" alt="" class="add" @click="addFn">
             </div>
           </div>
           </li>
@@ -37,7 +39,11 @@ import utils from "@/common/utils"
 export default {
   data(){
     return {
-      content:false
+      content:false,
+      books:[],
+      msg: "请先登录",
+      isTrue: false,
+      // watchnum:""
     }
   },
   watch: {
@@ -52,13 +58,64 @@ export default {
           
           }
   },
-  monuted(){
+  computed: {
+    // 计算是否有错误提示
+    totalamount: function(e) {
+      console.log(e.msg);
+    }   
+  },
+  mounted(){
+    if(utils.getCookie("first_vue_code")==200){
+      this.getDataCart(utils.getCookie("first_vue_id"));
+    }else{
+      this.content=false
+    }
     
   },
   methods: {
-    getDataCart(){
+   getDataCart(userid){
+      let that = this;
+      this.$ajax.post('/api/getcard',{
+        userid:userid
+      }).then(function(response){
+        if(response.data.status==1&&response.data.cart.length>0){
+          
+          that.books=response.data.cart;
+          that.content=true
+          
+        }
+      }).catch(function(error){
 
-    }
+      })
+
+    },
+    addFn(e){
+      e.target.previousElementSibling.value++
+    },
+    minusFn(e){
+      if(e.target.nextElementSibling.value==1){return}
+      e.target.nextElementSibling.value--
+    },
+    delFn(){
+      
+        let userId = utils.getCookie("first_vue_id");
+        let bookId = '1001';
+        let that   = this;
+        let url    = '/api/users/'+userId+'/delcart';
+        console.log(url)
+        this.$ajax.post(url,{
+          userId:userId,
+          bookId:bookId
+        }).then(function(response){
+          that.msg = '删除成功';
+          that.isTrue = true;
+          setTimeout(function() {
+            that.isTrue = false;
+          }, 1500);
+        }).catch(function(error){
+          console.log(error)
+        })
+      }
   }
 };
 </script>
@@ -142,6 +199,17 @@ export default {
       box-sizing: border-box;
       font-size: 18px;
       font-weight: bold;
+      img{
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+        float: right;
+        margin-right: 17px;
+        transition: 0.5s;
+        &:hover{
+          transform: rotate(-180deg);
+        }
+      }
     }
     .book-check{
       width: 20px;
@@ -180,12 +248,30 @@ export default {
         vertical-align: middle;
         border: 1px solid #ccc;
       }
-      span{
+      input{
         display: inline-block;
         vertical-align: middle;
         font-size: 22px;
-        padding: 15px;
+        // padding: 15px;
+        width: 40px;
+        border: 0;
+        // :disabled
+        text-align: center
       }
     }
+  }
+  .is-msg{
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    background: #000;
+    opacity: 0.5;
+    color: white;
+    font-size: 28px;
+    display: inline-block;
+    text-align: center;
+    padding: 10px;
+    width: 300px;
+    margin-left: -150px;
   }
 </style>
