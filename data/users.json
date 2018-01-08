@@ -28,7 +28,8 @@
             "page": 1005,
             "category": "图书>小说>社会图书>小说>外国小说>其他国家"
           },
-          "buynumber": 1
+          "buynumber": 1,
+          "totprice": "22.5"
         },
         {
           "id": 1002,
@@ -52,7 +53,8 @@
             "page": 1235,
             "category": "图书>传记>自传"
           },
-          "buynumber": 1
+          "buynumber": 1,
+          "totprice": "24.9"
         }
       ]
     },

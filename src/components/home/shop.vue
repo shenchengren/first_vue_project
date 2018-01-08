@@ -11,20 +11,20 @@
           <p class="title">书名：{{book.name}}<img src="../../assets/images/close.svg" alt="" @click="delFn"></p>
           <div class="content">
             <div class="book-check">
-              <input type="checkbox" name="" id="" :value="(book.buynumber*book.price).toFixed(2)" v-model="totnum">
+              <input type="checkbox" name="" id="" :value="book.totprice" v-model="totnum">
             </div>
             <div class="book-img">
               <img :src="book.smallImage" alt="">
             </div>
             <div class="summary"><b>简介：</b>{{book.details && book.details.summary}}</div>
             <div class="pricebox">
-              <span class="prive-add" v-model="nBox[index]">总价：{{(book.buynumber*book.price).toFixed(2)}}</span>
+              <span class="prive-add">总价：{{(book.buynumber*book.price).toFixed(2)}}</span>
               <!-- <input class="prive-add" v-model="nBox[index]">总价：{{(book.buynumber*book.price).toFixed(2)}}</span> -->
-              <!-- <input type="text" class="prive-add" :value="(book.buynumber*book.price).toFixed(2)" v-model="nBox[index]"> -->
+              <!-- <input type="text" class="prive-add" :value="(book.buynumber*book.price).toFixed(2)" :v-model="book[totprice]"> -->
               <span class="price">单价：￥{{(book.price*1).toFixed(2)}}</span>
             </div>
             <div class="numbox">
-              <img src="../../assets/images/minus.svg" alt="" class="minus" @click="minusFn(book)">
+              <img src="../../assets/images/minus.svg" alt="" class="minus" @click="minusFn(book,$event)">
               <!-- <span class="num">1</span> -->
               <input type="text" class="num" v-model="book.buynumber">
               <img src="../../assets/images/add.svg" alt="" class="add" @click="addFn(book,$event)">
@@ -47,7 +47,7 @@ export default {
       msg: "请先登录",
       isTrue: false,
       totnum:[],
-      nBox:[]
+      nBox:{}
       // totprice:""
     }
   },
@@ -98,10 +98,8 @@ export default {
         userid:userid
       }).then(function(response){
         if(response.data.status==1&&response.data.cart.length>0){
-          
           that.books=response.data.cart;
           that.content=true
-          
         }
       }).catch(function(error){
 
@@ -115,17 +113,22 @@ export default {
       // e.target.previousElementSibling.value++
       // console.log(this.numBox)
       book.buynumber++
-      console.log(e.target.parentNode.parentNode.firstChild.firstChild);
+      book.totprice=(book.buynumber*book.price).toFixed(2);
+      console.log(book.totprice)
+      // console.log(e.target.parentNode.parentNode.firstChild.firstChild);
       // e.target.parentNode.parentNode.firstChild.firstChild.checked = true;
       // e.target.pare
-      this.nBox
-      console.log(this.nBox)
+      // this.nBox
+      // console.log(this.nBox)
+      // console.log(book);
+      // console.log(book.totprice);
     },
-    minusFn(book){
+    minusFn(book,e){
       // if(e.target.nextElementSibling.value==1){return}
       // e.target.nextElementSibling.value--
       if(book.buynumber==1){return}
       book.buynumber--
+      book.totprice=(book.buynumber*book.price).toFixed(2);
     },
     delFn(){
       
