@@ -106,7 +106,7 @@ app.post('/api/users/:userId/cart', (req,res)=>{
     }
     res.json({status: 1});
 });
-app.post('/api/users/:userId/delcart', (req,res)=>{
+app.put('/api/users/:userId/delcart', (req,res)=>{
     // db('songs').remove({ title: 'low!' })
     console.log("进来了")
     let userId = req.params.userId;
@@ -121,6 +121,7 @@ app.post('/api/users/:userId/delcart', (req,res)=>{
     console.log("1111:",cart);
     if(user){
         Db.usersDb.remove({id: 1004});
+        cart.find({id:bookId}).remove().write();
         console.log("delete success!")
         // let book = booksDb.find({id: bookId}).value();
         // if(book){

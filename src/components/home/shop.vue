@@ -8,17 +8,19 @@
       </div>
       <ul>
         <li class="book" v-for="(book,index) in books" :key="book.id">
-          <p class="title">书名：{{book.id}}<img src="../../assets/images/close.svg" alt="" @click="delFn"></p>
+          <p class="title">书名：{{book.name}}<img src="../../assets/images/close.svg" alt="" @click="delFn"></p>
           <div class="content">
             <div class="book-check">
-              <input type="checkbox" name="" id="" :value="(book.buynumber*book.price).toFixed(2)" v-model="totnum[index]">
+              <input type="checkbox" name="" id="" :value="(book.buynumber*book.price).toFixed(2)" v-model="totnum">
             </div>
             <div class="book-img">
               <img :src="book.smallImage" alt="">
             </div>
             <div class="summary"><b>简介：</b>{{book.details && book.details.summary}}</div>
             <div class="pricebox">
-              <span class="prive-add">总价：{{(book.buynumber*book.price).toFixed(2)}}</span>
+              <span class="prive-add" v-model="nBox[index]">总价：{{(book.buynumber*book.price).toFixed(2)}}</span>
+              <!-- <input class="prive-add" v-model="nBox[index]">总价：{{(book.buynumber*book.price).toFixed(2)}}</span> -->
+              <!-- <input type="text" class="prive-add" :value="(book.buynumber*book.price).toFixed(2)" v-model="nBox[index]"> -->
               <span class="price">单价：￥{{(book.price*1).toFixed(2)}}</span>
             </div>
             <div class="numbox">
@@ -44,7 +46,8 @@ export default {
       books:[],
       msg: "请先登录",
       isTrue: false,
-      totnum:{},
+      totnum:[],
+      nBox:[]
       // totprice:""
     }
   },
@@ -70,9 +73,9 @@ export default {
     totprice: function(e) {
       console.log(this.totnum)
       let n=0
-      // this.totnum.forEach(function(ele,index){
-      //   n+=(+ele);
-      // })
+      this.totnum.forEach(function(ele,index){
+        n+=(+ele);
+      })
       // for(i in (this.totnum)){
       //   n+=this.totnum[i]
       // }
@@ -115,6 +118,8 @@ export default {
       console.log(e.target.parentNode.parentNode.firstChild.firstChild);
       // e.target.parentNode.parentNode.firstChild.firstChild.checked = true;
       // e.target.pare
+      this.nBox
+      console.log(this.nBox)
     },
     minusFn(book){
       // if(e.target.nextElementSibling.value==1){return}
@@ -129,7 +134,7 @@ export default {
         let that   = this;
         let url    = '/api/users/'+userId+'/delcart';
         console.log(url)
-        this.$ajax.post(url,{
+        this.$ajax.put(url,{
           userId:userId,
           bookId:bookId
         }).then(function(response){
