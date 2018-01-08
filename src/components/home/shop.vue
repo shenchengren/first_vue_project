@@ -7,29 +7,30 @@
         <label for="checkAll">全选</label>
       </div>
       <ul>
-        <li class="book" v-for="book in books" :key="book.id">
+        <li class="book" v-for="(book,index) in books" :key="book.id">
           <p class="title">书名：{{book.id}}<img src="../../assets/images/close.svg" alt="" @click="delFn"></p>
           <div class="content">
             <div class="book-check">
-              <input type="checkbox" name="" id="">
+              <input type="checkbox" name="" id="" :value="(book.buynumber*book.price).toFixed(2)" v-model="totnum[index]">
             </div>
             <div class="book-img">
               <img :src="book.smallImage" alt="">
             </div>
             <div class="summary"><b>简介：</b>{{book.details && book.details.summary}}</div>
             <div class="pricebox">
-              <span class="prive-add">总价：{{qqq&&"111"}}</span>
-              <span class="price">单价：￥{{book.price}}</span>
+              <span class="prive-add">总价：{{(book.buynumber*book.price).toFixed(2)}}</span>
+              <span class="price">单价：￥{{(book.price*1).toFixed(2)}}</span>
             </div>
             <div class="numbox">
-              <img src="../../assets/images/minus.svg" alt="" class="minus" @click="minusFn">
+              <img src="../../assets/images/minus.svg" alt="" class="minus" @click="minusFn(book)">
               <!-- <span class="num">1</span> -->
-              <input type="text" value="1" class="num" v-model="qqq">
-              <img src="../../assets/images/add.svg" alt="" class="add" @click="addFn">
+              <input type="text" class="num" v-model="book.buynumber">
+              <img src="../../assets/images/add.svg" alt="" class="add" @click="addFn(book,$event)">
             </div>
           </div>
           </li>
       </ul>
+      <div class="totleprice">总价：￥{{totprice}}</div>
     </div>
     <div class="shop-content-null" v-if="!content"><span>购物车空空也！！！</span></div>
   </div>
@@ -43,7 +44,13 @@ export default {
       books:[],
       msg: "请先登录",
       isTrue: false,
-      // watchnum:""
+      totnum:{},
+      // totprice:""
+    }
+  },
+  filters:{
+    numberFn(val){
+      // 
     }
   },
   watch: {
@@ -60,8 +67,17 @@ export default {
   },
   computed: {
     // 计算是否有错误提示
-    totalamount: function(e) {
-      console.log(e.msg);
+    totprice: function(e) {
+      console.log(this.totnum)
+      let n=0
+      // this.totnum.forEach(function(ele,index){
+      //   n+=(+ele);
+      // })
+      // for(i in (this.totnum)){
+      //   n+=this.totnum[i]
+      // }
+      
+      return (n*1).toFixed(2);
     }   
   },
   mounted(){
@@ -89,12 +105,22 @@ export default {
       })
 
     },
-    addFn(e){
-      e.target.previousElementSibling.value++
+    numChange(r){
+      console.log(r)
     },
-    minusFn(e){
-      if(e.target.nextElementSibling.value==1){return}
-      e.target.nextElementSibling.value--
+    addFn(book,e){
+      // e.target.previousElementSibling.value++
+      // console.log(this.numBox)
+      book.buynumber++
+      console.log(e.target.parentNode.parentNode.firstChild.firstChild);
+      // e.target.parentNode.parentNode.firstChild.firstChild.checked = true;
+      // e.target.pare
+    },
+    minusFn(book){
+      // if(e.target.nextElementSibling.value==1){return}
+      // e.target.nextElementSibling.value--
+      if(book.buynumber==1){return}
+      book.buynumber--
     },
     delFn(){
       
@@ -258,6 +284,13 @@ export default {
         // :disabled
         text-align: center
       }
+    }
+    .totleprice{
+      text-align: right;
+      padding-right: 15px;
+      margin-top: 20px;
+      font-size: 22px;
+      color: green;
     }
   }
   .is-msg{

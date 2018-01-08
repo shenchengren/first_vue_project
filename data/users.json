@@ -27,7 +27,32 @@
             "edition": "1",
             "page": 1005,
             "category": "图书>小说>社会图书>小说>外国小说>其他国家"
-          }
+          },
+          "buynumber": 1
+        },
+        {
+          "id": 1002,
+          "bookName": "颠覆者",
+          "price": "24.9",
+          "stock": "89",
+          "area": "China",
+          "author": "周鸿祎、范海涛",
+          "smallImage": "http://img3m2.ddimg.cn/69/7/25179432-1_u_9.jpg",
+          "details": {
+            "images": [
+              "http://img3m2.ddimg.cn/69/7/25179432-1_u_9.jpg",
+              "http://img51.ddimg.cn/99999990002348491.jpg",
+              "http://img60.ddimg.cn/upload_img/00726/0906/800x300wenyi.jpg"
+            ],
+            "summary": "从“超级熊孩子”到“互联网英雄”，看周鸿祎如何颠覆自我，颠覆人生 刘强东、王思聪、罗永浩、李开复、俞敏洪、徐小平、范冰冰、佟大为等联袂推荐",
+            "publisher": "北京联合出版有限公司",
+            "publishedTime": "2017年11月",
+            "originPrice": "¥49.80",
+            "edition": "1",
+            "page": 1235,
+            "category": "图书>传记>自传"
+          },
+          "buynumber": 1
         }
       ]
     },

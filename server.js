@@ -98,6 +98,7 @@ app.post('/api/users/:userId/cart', (req,res)=>{
     let user = usersDb.find({id: userId}).value();
     if(user){
         let book = booksDb.find({id: bookId}).value();
+        book.buynumber=1;
         if(book){
             let temp = usersDb.find({id: userId})
             temp.get('cart').push(book).write();
