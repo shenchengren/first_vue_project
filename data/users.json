@@ -29,6 +29,7 @@
             "category": "图书>小说>社会图书>小说>外国小说>其他国家"
           },
           "buynumber": 1,
+          "checkb": false,
           "totprice": "22.5"
         },
         {
@@ -54,7 +55,34 @@
             "category": "图书>传记>自传"
           },
           "buynumber": 1,
+          "checkb": false,
           "totprice": "24.9"
+        },
+        {
+          "id": 1003,
+          "bookName": "国王 武士 祭司 诗人",
+          "price": "39.60",
+          "stock": "23",
+          "area": "USA",
+          "author": "Robert Moore",
+          "smallImage": "http://img3m2.ddimg.cn/54/0/25192782-1_w_6.jpg",
+          "details": {
+            "images": [
+              "http://img3m2.ddimg.cn/54/0/25192782-1_w_6.jpg",
+              "http://img50.ddimg.cn/99999990002231030.jpg",
+              "http://img50.ddimg.cn/99999990002231030.jpg"
+            ],
+            "summary": "豆瓣8.5高分好评，美亚超级畅销书，英文版出版至今，已成为男性心理学领域的扛鼎之作。其观点和思想被无数人尝试翻译、引用和研究，被知乎、简书、微博、自然男人等数十万人评论、点赞、收藏，影响过千万人。",
+            "publisher": "电子工业出版社",
+            "publishedTime": "2018年02月",
+            "originPrice": "¥55.00",
+            "edition": "1",
+            "page": 284,
+            "category": "图书>心理学>心理百科"
+          },
+          "buynumber": 1,
+          "checkb": false,
+          "totprice": "39.60"
         }
       ]
     },

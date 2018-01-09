@@ -99,6 +99,7 @@ app.post('/api/users/:userId/cart', (req,res)=>{
     if(user){
         let book = booksDb.find({id: bookId}).value();
         book.buynumber=1;
+        book.checkb=false;
         // console.log(booksDb.find({id: bookId}).get('price'));
         book.totprice=booksDb.find({id: bookId}).get('price');
         if(book){

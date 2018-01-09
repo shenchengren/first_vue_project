@@ -3,7 +3,7 @@
     <div class="shop-content" v-if="content">
       <span class="is-msg" v-show="isTrue">{{msg}}</span>
       <div class="check-all">
-        <input type="checkbox" name="" id="checkAll">
+        <input type="checkbox" name="" id="checkAll" @click="clickquan">
         <label for="checkAll">全选</label>
       </div>
       <ul>
@@ -11,7 +11,7 @@
           <p class="title">书名：{{book.name}}<img src="../../assets/images/close.svg" alt="" @click="delFn"></p>
           <div class="content">
             <div class="book-check">
-              <input type="checkbox" name="" id="" :value="book.totprice" v-model="totnum">
+              <input type="checkbox" name="" id="" :value="book.totnum" v-model="book.checkb" @change="aaa(book)">
             </div>
             <div class="book-img">
               <img :src="book.smallImage" alt="">
@@ -32,7 +32,7 @@
           </div>
           </li>
       </ul>
-      <div class="totleprice">总价：￥{{totprice}}</div>
+      <div class="totleprice">总价：￥{{totnum}}</div>
     </div>
     <div class="shop-content-null" v-if="!content"><span>购物车空空也！！！</span></div>
   </div>
@@ -46,7 +46,7 @@ export default {
       books:[],
       msg: "请先登录",
       isTrue: false,
-      totnum:[],
+      totnum:"0.00",
       nBox:{}
       // totprice:""
     }
@@ -70,18 +70,27 @@ export default {
   },
   computed: {
     // 计算是否有错误提示
-    totprice: function(e) {
-      console.log(this.totnum)
-      let n=0
-      this.totnum.forEach(function(ele,index){
-        n+=(+ele);
-      })
-      // for(i in (this.totnum)){
-      //   n+=this.totnum[i]
-      // }
+    // totprice: function(e) {
+    //   console.log(this.totnum)
+    //   let n=0
+    //   this.totnum.forEach(function(ele,index){
+    //     n+=(+ele);
+    //   })
+    //   // for(i in (this.totnum)){
+    //   //   n+=this.totnum[i]
+    //   // }
       
-      return (n*1).toFixed(2);
-    }   
+    //   return (n*1).toFixed(2);
+    // } 
+    // quancheck:function(){
+    //   this.books.forEach(function(ele,index){
+    //     if(ele.checkb){
+    //       return true
+    //     }else{
+    //       return false
+    //     }
+    //   })
+    // }  
   },
   mounted(){
     if(utils.getCookie("first_vue_code")==200){
@@ -106,6 +115,30 @@ export default {
       })
 
     },
+    clickquan(e){
+      var that=this
+      console.log(e.target)
+      if(e.target.checked){
+        this.books.forEach(function(ele,index){
+          ele.checkb=true;
+          that.aaa(ele);
+        })
+      }else{
+        this.books.forEach(function(ele,index){
+          ele.checkb=false;
+          that.aaa(ele);
+        })
+      }
+    },
+    aaa(book){
+      // console.log(e.target.checked);
+      if(book.checkb){
+        // book.
+       this.totnum=((+this.totnum)+(+(book.buynumber*book.price))).toFixed(2)
+      }else{
+        this.totnum=((+this.totnum)-(+(book.buynumber*book.price))).toFixed(2)
+      }
+    },
     numChange(r){
       console.log(r)
     },
@@ -114,7 +147,11 @@ export default {
       // console.log(this.numBox)
       book.buynumber++
       book.totprice=(book.buynumber*book.price).toFixed(2);
+      
       console.log(book.totprice)
+      if(book.checkb){
+this.totnum=((+this.totnum)+(+book.price)).toFixed(2)
+      }
       // console.log(e.target.parentNode.parentNode.firstChild.firstChild);
       // e.target.parentNode.parentNode.firstChild.firstChild.checked = true;
       // e.target.pare
@@ -129,6 +166,10 @@ export default {
       if(book.buynumber==1){return}
       book.buynumber--
       book.totprice=(book.buynumber*book.price).toFixed(2);
+      if(book.checkb){
+        this.totnum=((+this.totnum)-(+book.price)).toFixed(2)
+      }
+      
     },
     delFn(){
       
