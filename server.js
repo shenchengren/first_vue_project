@@ -143,7 +143,6 @@ app.post('/api/getcard', (req,res)=>{
     };
     let user = usersDb.find({id: payload.userid}).value();
     if(user && payload.userid === user.id){
-        // console.log(user)
         resBody.status = 1;
         resBody.userId=user.id;
         resBody.cart=user.cart;
