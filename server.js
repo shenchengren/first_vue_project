@@ -134,7 +134,6 @@ app.put('/api/users/:userId/delcart', (req,res)=>{
 });
 // get cart
 app.post('/api/getcard', (req,res)=>{
-    // console.log(222)
     let payload = req.body;
     let resBody = {
         userId:"",
