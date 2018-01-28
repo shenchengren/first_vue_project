@@ -7,32 +7,6 @@
       "isLogin": true,
       "cart": [
         {
-          "id": 1001,
-          "bookName": "失乐园",
-          "price": "22.5",
-          "stock": "100",
-          "area": "Japan",
-          "author": "渡边淳一",
-          "smallImage": "http://img3m1.ddimg.cn/59/32/25182491-1_w_6.jpg",
-          "details": {
-            "images": [
-              "http://img3m1.ddimg.cn/59/32/25182491-1_w_6.jpg",
-              "http://img60.ddimg.cn/upload_img/00726/0906/800x300wenyi.jpg",
-              "http://img56.ddimg.cn/99999990002158156.jpg"
-            ],
-            "summary": "渡边淳一代表作，长期雄踞日本畅销书排行榜榜首，由黑木瞳、役所广司主演的电影引发“失乐园”热。此次的全新林少华译本，将带你体味不一样的渡边淳一，不一样的失乐园。",
-            "publisher": "青岛出版社",
-            "publishedTime": "2017年11月",
-            "originPrice": "¥45.00",
-            "edition": "1",
-            "page": 1005,
-            "category": "图书>小说>社会图书>小说>外国小说>其他国家"
-          },
-          "buynumber": 1,
-          "checkb": false,
-          "totprice": "22.5"
-        },
-        {
           "id": 1002,
           "bookName": "颠覆者",
           "price": "24.9",

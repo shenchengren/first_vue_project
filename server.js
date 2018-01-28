@@ -117,20 +117,17 @@ app.put('/api/users/:userId/delcart', (req,res)=>{
     let userId1 = req.body.userId;
     let user = usersDb.find({id: userId}).value();
     let cart = usersDb.find({id: userId}).get("cart")
-    // console.log(req.body)
-    // console.log(userId1);
-    // console.log(bookId);
-    console.log(user);
-    console.log("1111:",cart);
+
     if(user){
-        Db.usersDb.remove({id: 1004});
-        cart.find({id:bookId}).remove().write();
-        console.log("delete success!")
-        // let book = booksDb.find({id: bookId}).value();
-        // if(book){
-        //     let temp = usersDb.find({id: userId})
-        //     temp.get('cart').push(book).write();
-        // }
+        let books = usersDb.find({id: userId}).get("cart").value(); 
+        books.forEach((book,i,arr)=>{
+            if(book.id === +bookId) {
+                arr.splice(i,1);
+            }
+        });
+        usersDb.find({id: userId})
+                .assign({cart: books})
+                .write();
 
     }
     res.json({status: 1});
