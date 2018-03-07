@@ -30,14 +30,9 @@
 <script>
 import Router from "vue-router";
 import Vue from "vue";
-// import reg from "@/components/reg";
-
 import Utils from '@/common/utils';
-// let utils = new Utils();
-// console.log(utils);
+
 Vue.use(Router);
-// let aaa = new A();
-// console.log(aaa.job);
 const router = new Router();
 export default {
   data() {
@@ -48,9 +43,6 @@ export default {
       isTrue: false
     };
   },
-  // mounted: function() {
-  //     this.yincang();
-  // },
   methods: {
     keyDown(event) {
       if (event.keyCode == 13) {
@@ -58,10 +50,6 @@ export default {
       }
     },
     loginFun: function() {
-      // var checkBox = document.getElementById("checkBox");
-      // if (checkBox.checked) {
-      //   this.setCookie(this.username, this.psd, 7);
-      // }
       var that = this;
       this.$ajax
         .post("/api/login", {
@@ -73,7 +61,6 @@ export default {
             Utils.setCookie("first_vue_code", 200, 7);
             Utils.setCookie("first_vue_name",response.data.userName+"先生", 7);
             Utils.setCookie("first_vue_id",response.data.userId, 7);
-            // that.$emit("isLogFn", response.data.name + "先生");
             that.$router.push({ path: "/shop" });
           } else {
             that.msg = response.data.msg;

@@ -3,6 +3,7 @@
         <app-nav></app-nav>
             <router-view @increment="incrementTotal" :zhuangtai="fuzhuangtai" v-show="!isTrue"></router-view>
         <span v-show="isTrue">{{msg}}</span>
+        <audio src="../assets/music/m1.mp3" autoplay loop="loop"></audio>
     </div>
 </template>
 

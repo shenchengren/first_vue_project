@@ -16,9 +16,7 @@ export default {
       isTrue: false
     };
   },
-  // components: {
-  //   "app-nav": Nav
-  // },
+
   mounted() {},
   watch: {
     $route(to, from) {

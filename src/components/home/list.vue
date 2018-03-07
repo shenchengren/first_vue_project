@@ -37,8 +37,6 @@
       </ul>
       <span class="is-msg" v-show="isTrue">{{msg}}</span>
     </div>
-    
-    
   </div>
 </template>
 <script>
