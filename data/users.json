@@ -106,6 +106,66 @@
       "pwd": "123456",
       "isLogin": true,
       "cart": []
+    },
+    {
+      "id": "1005",
+      "name": "zhihua",
+      "pwd": "111111",
+      "isLogin": true,
+      "cart": [
+        {
+          "id": 1001,
+          "bookName": "失乐园",
+          "price": "22.5",
+          "stock": "100",
+          "area": "Japan",
+          "author": "渡边淳一",
+          "smallImage": "http://img3m1.ddimg.cn/59/32/25182491-1_w_6.jpg",
+          "details": {
+            "images": [
+              "http://img3m1.ddimg.cn/59/32/25182491-1_w_6.jpg",
+              "http://img60.ddimg.cn/upload_img/00726/0906/800x300wenyi.jpg",
+              "http://img56.ddimg.cn/99999990002158156.jpg"
+            ],
+            "summary": "渡边淳一代表作，长期雄踞日本畅销书排行榜榜首，由黑木瞳、役所广司主演的电影引发“失乐园”热。此次的全新林少华译本，将带你体味不一样的渡边淳一，不一样的失乐园。",
+            "publisher": "青岛出版社",
+            "publishedTime": "2017年11月",
+            "originPrice": "¥45.00",
+            "edition": "1",
+            "page": 1005,
+            "category": "图书>小说>社会图书>小说>外国小说>其他国家"
+          },
+          "buynumber": 1,
+          "checkb": false,
+          "totprice": "22.5"
+        },
+        {
+          "id": 1010,
+          "bookName": "明朝那些事儿全集",
+          "price": "148.50",
+          "stock": "165",
+          "area": "China",
+          "author": "当年明月",
+          "smallImage": "http://img3m2.ddimg.cn/49/14/25103182-1_w_3.jpg",
+          "details": {
+            "images": [
+              "http://img3m4.ddimg.cn/88/33/25174204-1_w_9.jpg",
+              "http://img51.ddimg.cn/99999990002118721.jpg",
+              "http://img51.ddimg.cn/99999990002118721.jpg"
+            ],
+            "summary": "(近千万阅读点击量，千万读者翘首以待的柳三笑惊艳之作，话题/口碑双高，超级畅销新派历史悬疑大作《金吾卫》系列！一支比锦衣卫更神秘的古代禁军，神秘禁卫破解惊天秘术与谜案！爱奇艺同名大型影视项目即将启动)",
+            "publisher": "现代出版社",
+            "publishedTime": "2017年10月",
+            "originPrice": "¥43.80",
+            "edition": "1",
+            "page": 356,
+            "category": "图书>青春文学>大陆原创"
+          },
+          "buynumber": 1,
+          "checkb": false,
+          "totprice": "148.50"
+        }
+      ]
     }
   ]
 }
