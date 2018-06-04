@@ -114,7 +114,7 @@ app.put('/api/users/:userId/delcart', (req,res)=>{
     console.log("进来了")
     let userId = req.params.userId;
     let bookId = req.body.bookId;
-    let userId1 = req.body.userId;
+//  let userId1 = req.body.userId;
     let user = usersDb.find({id: userId}).value();
     let cart = usersDb.find({id: userId}).get("cart")
 

@@ -18,9 +18,9 @@
 
 <script>
 import Utils from '../../common/utils';
-// let Utils = new Utils();
+
 export default {
-  // props: ["zhuangtai"],
+
   data() {
     return {
       name: "admin先生",
@@ -29,7 +29,7 @@ export default {
   },
   mounted() {
     //判断是否是登录状态
-    console.log(Utils);
+//  console.log(Utils);
     if (Utils.getCookie("first_vue_code") == 200) {
       this.name=Utils.getCookie("first_vue_name")
       this.isShow = false;

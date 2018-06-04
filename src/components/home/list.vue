@@ -123,7 +123,7 @@ export default {
     cartFn(data){
       // 判断是否是登录状态
       if (utils.getCookie("first_vue_code") != "200"){
-        console.log(utils.getCookie("first_vue_code"))
+//      console.log(utils.getCookie("first_vue_code"))
         this.msg = '请先登录';
         this.isTrue = true;
         let self    = this;
